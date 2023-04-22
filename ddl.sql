@@ -66,6 +66,9 @@ CREATE TABLE IF NOT EXISTS instructor(
 	company_id 		INTEGER		 NOT NULL,
 	specialization  VARCHAR(200),
 	department		VARCHAR(200),
+	starttime 		TIMESTAMP	 NOT NULL,
+	endtime			TIMESTAMP,
+	is_current		INTEGER		 NOT NULL,
 	
 	CONSTRAINT instr_pk PRIMARY KEY (instr_id),
 	CONSTRAINT fk_instr_person FOREIGN KEY (person_id)
