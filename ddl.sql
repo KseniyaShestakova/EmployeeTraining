@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS course(
 	course_nm 	VARCHAR(100) NOT NULL,
 	direction	VARCHAR(100) NOT NULL,
 	description VARCHAR(200) NOT NULL,
-	type 		INTEGER		 NOT NULL,
+	duration 	INTEGER		 NOT NULL,
 	
 	
 	CONSTRAINT course_pk PRIMARY KEY (course_id),
@@ -96,7 +96,6 @@ CREATE TABLE IF NOT EXISTS program(
 	program_nm 	VARCHAR(100) NOT NULL,
 	direction	VARCHAR(100) NOT NULL,
 	description VARCHAR(200) NOT NULL,
-	duration	INTEGER		 NOT NULL,
 	type 		INTEGER		 NOT NULL,
 	
 	CONSTRAINT program_pk PRIMARY KEY (program_id),
