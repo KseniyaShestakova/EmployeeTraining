@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS company CASCADE;
 DROP TABLE IF EXISTS instructor CASCADE;
 DROP TABLE IF EXISTS program_course CASCADE;
 DROP TABLE IF EXISTS contract_status_ref CASCADE;
+DROP TABLE IF EXISTS program_type_ref CASCADE;
 DROP TABLE IF EXISTS payer_ref CASCADE;
 
 
@@ -34,20 +35,6 @@ CREATE TABLE IF NOT EXISTS contract_status_ref(
 	status		 VARCHAR(200) NOT NULL,
 	
 	CONSTRAINT status_pk PRIMARY KEY (status_id)
-);
-
----учебный предмет--------
-CREATE TABLE IF NOT EXISTS course(
-	course_id 	INTEGER 	 NOT NULL,
-	course_nm 	VARCHAR(100) NOT NULL,
-	direction	VARCHAR(100) NOT NULL,
-	description VARCHAR(200) NOT NULL,
-	duration 	INTEGER		 NOT NULL,
-	
-	
-	CONSTRAINT course_pk PRIMARY KEY (course_id),
-	CONSTRAINT fk_course_type FOREIGN KEY (type)
-		REFERENCES program_type_ref ON DELETE SET NULL
 );
 
 ---физическое лицо---
@@ -78,9 +65,6 @@ CREATE TABLE IF NOT EXISTS instructor(
 	person_id 		INTEGER		 NOT NULL,
 	company_id 		INTEGER		 NOT NULL,
 	specialization  VARCHAR(200),
-	starttime 		TIMESTAMP	 NOT NULL,
-	endtime			TIMESTAMP,
-	is_current		INTEGER		 NOT NULL,
 	department		VARCHAR(200),
 	
 	CONSTRAINT instr_pk PRIMARY KEY (instr_id),
@@ -88,6 +72,24 @@ CREATE TABLE IF NOT EXISTS instructor(
 		REFERENCES person ON DELETE SET NULL,
 	CONSTRAINT fk_instr_company FOREIGN KEY (company_id)
 		REFERENCES company ON DELETE SET NULL
+);
+
+---учебный предмет--------
+CREATE TABLE IF NOT EXISTS course(
+	course_id 	INTEGER 	 NOT NULL,
+	course_nm 	VARCHAR(100) NOT NULL,
+	direction	VARCHAR(100) NOT NULL,
+	description VARCHAR(200) NOT NULL,
+	duration 	INTEGER		 NOT NULL,
+	
+	instructor_id INTEGER NOT NULL,
+	starttime 		TIMESTAMP	 NOT NULL,
+	endtime			TIMESTAMP,
+	is_current		INTEGER		 NOT NULL,
+	
+	CONSTRAINT course_pk PRIMARY KEY (course_id),
+	CONSTRAINT fk_course_instr FOREIGN KEY (instructor_id)
+		REFERENCES instructor ON DELETE SET NULL
 );
 
 ---программа---
@@ -155,3 +157,4 @@ CREATE TABLE IF NOT EXISTS payment(
 	CONSTRAINT fk_payment_payer FOREIGN KEY (payer)
 		REFERENCES payer_ref ON DELETE SET NULL
 );
+
