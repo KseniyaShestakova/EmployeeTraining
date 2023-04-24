@@ -88,3 +88,27 @@ UPDATE course
 	SET description=CONCAT('NEW: ', description)
 WHERE starttime >= '2020-01-01';
 
+
+---delete-запросы---
+DELETE FROM contract WHERE contract_id=4;
+---удаляем информацию об отчисленных---
+DELETE FROM contract WHERE status=0;
+---удаляем устаревшие данные---
+DELETE FROM instructor WHERE endtime <= '2000-01-01';
+DELETE FROM course WHERE endtime <= '2000-01-01';
+DELETE FROM payment WHERE endtime <= '2000-01-01';
+---удаляем данные о тех физических лицах, которые не инструкторы и не обучающиеся---
+DELETE FROM person AS p 
+	WHERE (person_id NOT IN (SELECT person_id FROM instructor) 
+	AND person_id NOT IN (SELECT person_id FROM contract));
+---аналогично с юридическими лицами, которые не предоставили обучающихся и инструкторов---
+DELETE FROM company AS c 
+	WHERE (company_id NOT IN (SELECT company_id FROM instructor) 
+	AND company_id NOT IN (SELECT company_id FROM contract));
+---удалим компании с некорректной длинной ИНН или КПП
+SELECT LENGTH(inn) AS inn_len, LENGTH(kpp) as kpp_len FROM company;
+DELETE FROM company WHERE NOT(LENGTH(inn)=10 AND LENGTH(kpp)=9);
+---удалим информацию о курсах и программах, о которых нет информации в course_program---
+DELETE FROM course WHERE course_id NOT IN (SELECT DISTINCT course_id FROM program_course);
+DELETE FROM program WHERE program_id NOT IN (SELECT DISTINCT program_id FROM program_course);
+
