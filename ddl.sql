@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS program_course(
 	CONSTRAINT fk_program_course_program FOREIGN KEY (program_id)
 		REFERENCES program ON DELETE SET NULL,
 	CONSTRAINT fk_program_course_course FOREIGN KEY (course_id)
-		REFERENCES program ON DELETE SET NULL
+		REFERENCES course ON DELETE SET NULL
 );
 
 ---договор---
