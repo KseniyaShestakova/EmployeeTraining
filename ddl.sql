@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS contract(
 	contract_id INTEGER		NOT NULL,
 	person_id   INTEGER   	NOT NULL,
 	company_id  INTEGER   	NOT NULL,
-	starttime 	INTEGER 	NOT NULL,
+	starttime 	TIMESTAMP 	NOT NULL,
 	program_id	INTEGER		NOT NULL,
 	status		INTEGER		NOT NULL,
 	
