@@ -1,5 +1,5 @@
 SELECT  contract_id,
 		COUNT(*) AS pay_num,
-		SUM(sum) AS total
+		SUM(payer_ref) AS payer_ref_sum
 	FROM payment GROUP BY contract_id
-	HAVING COUNT(*) >= 2 AND SUM(sum) > 200000;
+	HAVING COUNT(*) >= 1 AND SUM(payer_ref)=COUNT(*);
