@@ -23,6 +23,24 @@ INSERT INTO person VALUES
 	(24, 'Вера', 'Павловна', 'Баранчикова', 'BN4111111', '2004-04-02');
 	
 -------------------------------------------------------------------
+DROP SEQUENCE IF EXISTS company_id_seq;
+CREATE SEQUENCE company_id_seq START 10;
+
+CREATE OR REPLACE FUNCTION set_company_id()
+RETURNS TRIGGER AS
+$$
+BEGIN
+	UPDATE company_id SET company_id=nextval('company_id_seq')
+	WHERE company_id = NEW.company_id OR company_id IS NULL;
+	RETURN NULL;
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE TRIGGER company_insert_trigger
+AFTER INSERT ON company
+FOR EACH ROW 
+EXECUTE FUNCTION set_company_id();
+--------------------------------------------------------------
 ---в предположении того, что одновременно можно быть инструктором только на одном курсе
 
 SELECT * FROM instructor
@@ -60,7 +78,8 @@ AFTER INSERT ON instructor
 FOR EACH ROW
 EXECUTE FUNCTION process_instructor_insert();
 
----проверка того, что это работает, в т.ч. с множественным INSERT
+SELECT * FROM instructor;
+
 INSERT INTO instructor VALUES
 	(40, 5, 6, 'преподаватель английской литературы', 'ДИЯ', '2024-04-20', NULL, 0),
 	(50, 0, 0, 'ответственный за информационную безопасность', 'IT-отдел', '2023-04-20', NULL, 0);
