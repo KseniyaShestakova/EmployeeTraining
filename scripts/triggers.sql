@@ -5,14 +5,13 @@ CREATE OR REPLACE FUNCTION set_person_id()
 RETURNS TRIGGER AS
 $$
 BEGIN
-	UPDATE person SET person_id=nextval('person_id_seq')
-	WHERE person_id = NEW.person_id OR person_id IS NULL;
-	RETURN NULL;
+	NEW.person_id := nextval('person_id_seq')
+	RETURN NEW;
 END;
 $$ language plpgsql;
 
 CREATE OR REPLACE TRIGGER person_insert_trigger
-AFTER INSERT ON person
+BEFORE INSERT ON person
 FOR EACH ROW 
 EXECUTE FUNCTION set_person_id();
 
@@ -30,14 +29,13 @@ CREATE OR REPLACE FUNCTION set_company_id()
 RETURNS TRIGGER AS
 $$
 BEGIN
-	UPDATE company_id SET company_id=nextval('company_id_seq')
-	WHERE company_id = NEW.company_id OR company_id IS NULL;
-	RETURN NULL;
+	NEW.company_id := nextval('company_id_seq')
+	RETURN NEW;
 END;
 $$ language plpgsql;
 
 CREATE OR REPLACE TRIGGER company_insert_trigger
-AFTER INSERT ON company
+BEFORE INSERT ON company
 FOR EACH ROW 
 EXECUTE FUNCTION set_company_id();
 --------------------------------------------------------------
