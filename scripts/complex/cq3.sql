@@ -8,5 +8,5 @@ SELECT program_id, course_id, duration,
 FROM base
 )
 SELECT program_id, course_id, duration, prog_duration, 
-	CAST(duration AS NUMERIC) / CAST(prog_duration AS NUMERIC) AS rel_duration
+	ROUND(CAST(duration AS NUMERIC) / CAST(prog_duration AS NUMERIC), 2) AS rel_duration
 FROM global_base;
