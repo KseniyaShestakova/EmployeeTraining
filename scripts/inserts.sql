@@ -66,7 +66,7 @@ INSERT INTO instructor VALUES
 		 'Кафедра химии и биологии', '2022-09-01', '2023-07-01', 0);
 INSERT INTO instructor VALUES
 		(1, 0, 7, 'преподаватель инструментов 1С', 'Кафедра АТП',
-		'2023-09-01', '2024-07-01', 1);
+		'2023-09-01', NULL, 1);
 INSERT INTO instructor VALUES
 		(3, 1, 7, 'преподаватель английского языка', 'ДИЯ',
 		'2022-10-01', NULL, 1);
@@ -75,7 +75,7 @@ INSERT INTO instructor VALUES
 		'ДИЯ', '2021-07-01', '2022-07-01', 0);
 INSERT INTO instructor VALUES
 		(4, 3, 8, 'Старший по безопасности',  'Отдел безопасности',
-		'2000-09-01', '2024-10-15', 1);
+		'2000-09-01', NULL, 1);
 INSERT INTO instructor VALUES
 		(5, 7, 1, 'старший бухгалтер', 'отдел правоведения',
 		'2004-10-02', NULL, 1);
@@ -84,7 +84,7 @@ INSERT INTO instructor VALUES
 		'1995-08-20', '2005-08-20', 0);
 INSERT INTO instructor VALUES
 		(7, 0, 0, 'специалист по финансовой грамотности', 'отдел финансовой грамотности',
-		'2005-08-20', '2023-08-20', 1);
+		'2005-08-20', NULL, 1);
 INSERT INTO instructor VALUES
 		(8, 4, 2, 'бухгалтер', 'отдел оптимизаций',
 		'2010-09-01', '2014-06-15', 0);
@@ -166,8 +166,8 @@ INSERT INTO program VALUES
 ---заполнение связей между программами и курсами---
 INSERT INTO program_course VALUES (0, 0, 0, '2005-10-02', NULL, 1);
 INSERT INTO program_course VALUES (1, 0, 1, '2005-10-02', NULL, 1);	
-INSERT INTO program_course VALUES (2, 0, 4, '2023-09-01', '2024-07-01', 1);
-INSERT INTO program_course VALUES (3, 0, 5, '2022-12-01', '2024-07-01', 1);
+INSERT INTO program_course VALUES (2, 0, 4, '2023-09-01', NULL, 1);
+INSERT INTO program_course VALUES (3, 0, 5, '2022-12-01', NULL, 1);
 INSERT INTO program_course VALUES (4, 1, 0, '2010-09-01', '2012-12-12', 0);
 INSERT INTO program_course VALUES (5, 1, 2, '2011-09-01', '2012-12-12', 0);
 INSERT INTO program_course VALUES (6, 1, 3, '2010-09-01', '2012-12-12', 0);
@@ -176,9 +176,9 @@ INSERT INTO program_course VALUES (8, 2, 3, '2010-09-01', '2013-06-15', 0);
 INSERT INTO program_course VALUES (9, 2, 0, '2013-06-15', NULL, 1);
 INSERT INTO program_course VALUES (10, 3, 6, '2006-09-01', '2010-09-01', 0);
 INSERT INTO program_course VALUES (11, 3, 7, '2005-09-01', '2007-09-01', 0);
-INSERT INTO program_course VALUES (12, 3, 9, '2022-09-01', '2023-07-01', 1);
-INSERT INTO program_course VALUES (13, 3, 8, '2022-09-01', '2023-09-01', 1);
-INSERT INTO program_course VALUES (14, 4, 8, '2022-09-01', '2023-09-01', 1);
+INSERT INTO program_course VALUES (12, 3, 9, '2022-09-01', NULL, 1);
+INSERT INTO program_course VALUES (13, 3, 8, '2022-09-01', NULL, 1);
+INSERT INTO program_course VALUES (14, 4, 8, '2022-09-01', NULL, 1);
 	
 
 ---заполнение договоров---
